@@ -5,7 +5,7 @@
 Summary:	C bindings for Google's Protocol Buffers
 Name:		protobuf-c
 Version:	0.15
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Libraries
 Source0:	http://protobuf-c.googlecode.com/files/%{name}-%{version}.tar.gz
