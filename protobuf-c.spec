@@ -5,16 +5,20 @@
 Summary:	C bindings for Google's Protocol Buffers
 Summary(pl.UTF-8):	Wiązania C do biblioteki Google Protocol Buffers
 Name:		protobuf-c
-Version:	0.15
-Release:	2
+Version:	1.0.2
+Release:	1
 License:	Apache v2.0
 Group:		Libraries
-#Source0Download: http://code.google.com/p/protobuf-c/downloads/list
-Source0:	http://protobuf-c.googlecode.com/files/%{name}-%{version}.tar.gz
-# Source0-md5:	73ff0c8df50d2eee75269ad8f8c07dc8
-URL:		http://code.google.com/p/protobuf-c/
+Source0:	https://github.com/protobuf-c/protobuf-c/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	fdd242b3380005dc9a7d2f88e9f66a3a
+URL:		https://github.com/protobuf-c/protobuf-c
+BuildRequires:	autoconf >= 2.64
+BuildRequires:	automake >= 1:1.11
+BuildRequires:	doxygen
 BuildRequires:	libstdc++-devel
-BuildRequires:	protobuf-devel
+BuildRequires:	libtool >= 2:2
+BuildRequires:	pkgconfig
+BuildRequires:	protobuf-devel >= 2.5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -60,7 +64,13 @@ Statyczna biblioteka protobuf-c.
 %setup -q
 
 %build
-%configure
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure \
+	--disable-silent-rules
 
 %{__make}
 
@@ -81,10 +91,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README TODO
+%doc ChangeLog LICENSE README.md TODO
 %attr(755,root,root) %{_bindir}/protoc-c
 %attr(755,root,root) %{_libdir}/libprotobuf-c.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libprotobuf-c.so.0
+%attr(755,root,root) %ghost %{_libdir}/libprotobuf-c.so.1
 
 %files devel
 %defattr(644,root,root,755)
@@ -92,6 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 # XXX: dir shared with libtcmalloc and protobuf
 %dir %{_includedir}/google
 %{_includedir}/google/protobuf-c
+%{_includedir}/protobuf-c
 %{_pkgconfigdir}/libprotobuf-c.pc
 
 %files static
