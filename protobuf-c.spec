@@ -6,12 +6,13 @@ Summary:	C bindings for Google's Protocol Buffers
 Summary(pl.UTF-8):	Wiązania C do biblioteki Google Protocol Buffers
 Name:		protobuf-c
 Version:	1.3.1
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Libraries
 #Source0Download: https://github.com/protobuf-c/protobuf-c/releases
 Source0:	https://github.com/protobuf-c/protobuf-c/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	ab3aa79312ed7b1fca401c8682e3aa7a
+Patch0:		%{name}-update.patch
 URL:		https://github.com/protobuf-c/protobuf-c
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
@@ -64,6 +65,7 @@ Statyczna biblioteka protobuf-c.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
