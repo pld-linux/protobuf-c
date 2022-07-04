@@ -1,17 +1,17 @@
 #
 # Conditional build:
-%bcond_without	tests		# build with tests
+%bcond_without	tests	# test suite
 
 Summary:	C bindings for Google's Protocol Buffers
 Summary(pl.UTF-8):	Wiązania C do biblioteki Google Protocol Buffers
 Name:		protobuf-c
-Version:	1.3.3
-Release:	6
+Version:	1.4.0
+Release:	1
 License:	Apache v2.0
 Group:		Libraries
 #Source0Download: https://github.com/protobuf-c/protobuf-c/releases
 Source0:	https://github.com/protobuf-c/protobuf-c/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	16a79ce1f6e168c1b3ed41175ba57ee5
+# Source0-md5:	277a6c23b3721c39e7e52c3b22b38414
 URL:		https://github.com/protobuf-c/protobuf-c
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
@@ -19,8 +19,8 @@ BuildRequires:	doxygen
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libtool >= 2:2
 BuildRequires:	pkgconfig
-BuildRequires:	protobuf-devel >= 2.6.0
-Requires:	protobuf >= 2.6.0
+BuildRequires:	protobuf-devel >= 3.0.0
+Requires:	protobuf >= 3.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -80,6 +80,7 @@ Statyczna biblioteka protobuf-c.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
